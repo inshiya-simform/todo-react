@@ -1,5 +1,6 @@
 import { Tab, Tabs, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
+import { TABS } from "../../Constants";
 
 const Navbar = () => {
   const theme = useTheme();
@@ -15,15 +16,13 @@ const Navbar = () => {
       }}
       aria-label="navigation tabs"
     >
-      <Link to="/">
-        <Tab label="Home" />
-      </Link>
-      <Link to="/todo">
-        <Tab label="Todo" />
-      </Link>
-      <Link to="/about">
-        <Tab label="About" />
-      </Link>
+      {
+        TABS.map((tab)=>(
+          <Link to={tab==='Home' ? '/' : '/'+ tab.toLowerCase()}>
+            <Tab label={tab}/>
+          </Link>
+        ))
+      }
     </Tabs>
   );
 };
