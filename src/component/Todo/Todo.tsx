@@ -13,10 +13,9 @@ import { Outlet } from "react-router-dom";
 import { nanoid } from "nanoid";
 import { getFormattedTime } from "../../utils/getFormatedTime";
 import Search from "./Search";
-import type { Todo } from "../../types/types";
 import { TodoContext } from "../../store/TodoContext";
 
-const Todo = () => {
+const Todos = () => {
   const { todos, dispatch } = useContext(TodoContext);
   const [isDialodOpen, setIsDialogOpen] = useState(false);
   const todoRef = useRef<HTMLInputElement>(null);
@@ -94,4 +93,4 @@ const Todo = () => {
   );
 };
 
-export default Todo;
+export default Todos;

@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import ListTodo from "./ListTodo";
 import type { Todo } from "../../types/types";
+import React from "react";
 
 interface SearchProp {
   todos: {
@@ -26,17 +27,19 @@ export default function Search({ todos }: SearchProp) {
     options = todos.todos.map((todo: Todo) => todo.task);
   }
   const handleInputChange = (
-    event: React.SyntheticEvent,
+    _: React.SyntheticEvent,
     newInputValue: string
   ) => {
-    setInputValue(newInputValue);
-    const newFiltered = todos.todos.filter((todo: Todo) =>
-      todo.task.toLowerCase().includes(newInputValue.toLowerCase())
-    );
-    setFilteredOptions(newFiltered);
+      setInputValue(newInputValue);
+      const newFiltered = todos.todos.filter((todo: Todo) =>
+        todo.task.toLowerCase().includes(newInputValue.toLowerCase())
+      );
+      setFilteredOptions(newFiltered);
   };
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", mt: 4,width:'100%' }}>
+    <Box
+      sx={{ display: "flex", justifyContent: "center", mt: 4, width: "100%" }}
+    >
       <Paper elevation={3} sx={{ p: 3, width: "100%" }}>
         <Typography variant="h6" gutterBottom>
           Search Todo
@@ -67,7 +70,11 @@ export default function Search({ todos }: SearchProp) {
           </Alert>
         ) : (
           <Paper elevation={1} sx={{ p: 2 }}>
-            <ListTodo todos={filteredOptions.length !== 0? filteredOptions :todos.todos} />
+            <ListTodo
+              todos={
+                filteredOptions.length !== 0 ? filteredOptions : todos.todos
+              }
+            />
           </Paper>
         )}
       </Paper>

@@ -3,7 +3,7 @@ import "./App.css";
 import Home from "./component/Home/Home";
 import About from "./component/About/About";
 import TodoItem from "./component/TodoItem/TodoItem";
-import Todo from "./component/Todo/Todo";
+import Todos from "./component/Todo/Todo";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}>
           <Route index element={<div>Welcome to todo app.</div>}/>
-          <Route path="todo" element={<Todo />}> 
+          <Route path="todo" element={<Todos />}> 
             <Route path=":paramId" element={<TodoItem />} />
           </Route>
           <Route path="about" element={<About />} />
