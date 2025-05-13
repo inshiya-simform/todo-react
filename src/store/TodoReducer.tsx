@@ -37,12 +37,6 @@ export function todoReducer(state: TodoState, action: TodoAction): TodoState {
           return todo;
         }),
       };
-
-    case "FILTER_BY_TITLE":
-      return {
-        todos: state.todos.filter((todo) => todo.task === action.payload.task),
-      };
-
     default:
       return state;
   }

@@ -14,21 +14,25 @@ import { nanoid } from "nanoid";
 import { getFormattedTime } from "../../utils/getFormatedTime";
 import Search from "./Search";
 import { TodoContext } from "../../store/TodoContext";
+import { ACTION } from "../../Constants";
+
+type Action = keyof typeof ACTION
 
 const Todos = () => {
   const { todos, dispatch } = useContext(TodoContext);
   const [isDialodOpen, setIsDialogOpen] = useState(false);
   const todoRef = useRef<HTMLInputElement>(null);
-  function handleAddDialog(action: string) {
+  function handleAddDialog(action:Action) {
     setIsDialogOpen((prev) => !prev);
-    if (action === "save") {
+    if (action === 'SAVE') {
+      console.log("dsuj")
       if (!todoRef.current) {
         return;
       }
       const todo = todoRef.current.value.trim();
       if (!todo) return;
       const currentTime = getFormattedTime();
-      const newTodos = dispatch({
+      dispatch({
         type: "ADD",
         payload: {
           id: nanoid(),
@@ -38,7 +42,6 @@ const Todos = () => {
         },
       });
       todoRef.current.value = "";
-      localStorage.setItem("todos", JSON.stringify(newTodos));
     }
   }
   return (
@@ -48,14 +51,14 @@ const Todos = () => {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => handleAddDialog("add")}
+          onClick={() => handleAddDialog('ADD')}
         >
           Add Todo
         </Button>
       </Stack>
       <Dialog
         open={isDialodOpen}
-        onClose={() => handleAddDialog("close")}
+        onClose={() => handleAddDialog('CLOSE')}
         maxWidth="sm"
         fullWidth
       >
@@ -73,14 +76,14 @@ const Todos = () => {
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={() => handleAddDialog("save")}
+            onClick={() => handleAddDialog('SAVE')}
             variant="contained"
             color="success"
           >
             Save & Close
           </Button>
           <Button
-            onClick={() => handleAddDialog("close")}
+            onClick={() => handleAddDialog('CLOSE')}
             variant="outlined"
             color="secondary"
           >
